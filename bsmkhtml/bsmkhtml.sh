@@ -37,4 +37,4 @@ cat post.html >> out.html
 echo "copied post to file"
 
 cp out.html "$OUT/index.html"
-cp ./files/* "$OUT/files/"
+cp -v ./files/* "$OUT/files/"
