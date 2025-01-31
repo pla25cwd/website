@@ -1,11 +1,14 @@
 #!/bin/bash
 
-IFS="@"
 OUT="/media/sda/html/bestshitsarchive"
 
 echo "" > out.html
 cat pre.html >> out.html
 echo "copied pre to file"
+
+rm -v $OUT/files/*
+
+IFS="@"
 
 # author, songname, genre, release time, link
 data="$(sort -n -t"," -k4 data.csv | tr '\n' '@')"
@@ -14,9 +17,9 @@ for l in $data; do
 	((index++))
 	echo "reaidng $index"
 
-	l_author="$(echo $l | cut -d ',' -f1 | tr -d "\"")"
-	l_songname="$(echo $l | cut -d ',' -f2 | tr -d "\"")"
-	l_genre="$(echo $l | cut -d ',' -f3 | tr -d "\"")"
+	l_author="$(echo $l | cut -d ',' -f1)"
+	l_songname="$(echo $l | cut -d ',' -f2)"
+	l_genre="$(echo $l | cut -d ',' -f3)"
 	l_time="$(echo $l | cut -d ',' -f4)"
 	l_time="$(date --date=@$l_time '+%d/%m/%y')"
 	l_link="$(echo $l | cut -d "," -f5)"
