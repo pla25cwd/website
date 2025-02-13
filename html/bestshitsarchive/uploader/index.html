@@ -1,0 +1,93 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1024px, initial-scale=1.0">
+    <title>best shits archive</title>
+    <style>
+	body {
+		font-family: Arial, sans-serif;
+		background-color: #b67c7c;
+		margin: 0;
+		padding: 0;
+		height: 100%
+	}
+	header {
+		background-color: #5c0000;
+		color: white;
+		padding: 10px 0;
+		text-align: center;
+	}
+	main {
+		padding: 25vh 20px;
+	}
+	table {
+		height: auto;
+		width: 90%;
+		margin: auto;
+		border-spacing: 5px 0px;
+	}
+	td {
+		text-align: center;
+		padding: 5px;
+		overflow: clip;
+		color: white;
+		background-color: #5c0000;
+	}
+	.inputs {
+		width: 95%;
+		margin: auto;
+	}
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>best shets uploeder</h1>
+	<p>this is a bit busted tbh. if you upload something and nothing happens, just assume it worked.</p>
+	<p>click <a href="../">here</a> to go back to the archive.</p>
+    </header>
+
+    <main>
+	    <form id="form" onsubmit="event.preventDefault(); sendRequest();">
+		<table>
+	
+			<tr>
+				<td>key</td>
+				<td>author</td>
+				<td>title</td>
+				<td>genre</td>
+				<td>date</td>
+				<td>file</td>
+			</tr>
+			<tr>
+				<td>
+					<input class="inputs" type="password" name="key" id="key" required>
+				</td>
+				<td>
+					<input class="inputs" type="text" name="author" id="author" required>
+				</td>
+				<td>
+					<input class="inputs" type="text" name="title" id="title" required>
+				</td>
+				<td>
+					<input class="inputs" type="text" name="genre" id="genre" required>
+				</td>
+				<td>
+					<input class="inputs" type="date" name="date" id="date" required>
+				</td>
+				<td>
+					<input class="inputs" type="file" name="file" id="file" required accept=".mp3">
+				</td>
+			</tr>
+		</table>
+		<br>
+		<center>
+			<input type="submit", value="upload shit">
+		</center>
+		</form>
+    </main>
+	<script src="upload.js"></script>
+</body>
+</html>

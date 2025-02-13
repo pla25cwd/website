@@ -1,5 +1,7 @@
 #!/bin/bash
 
+cd /media/sda/bsmkhtml/
+
 OUT="/media/sda/html/bestshitsarchive"
 
 echo "" > out.html

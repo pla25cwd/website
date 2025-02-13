@@ -1,0 +1,104 @@
+server {
+
+	root /media/sda/html/;
+
+	index index.html;
+	server_name gringpartei.ch x-im.li;
+
+	location = / {
+		autoindex on;
+		autoindex_localtime on;
+		add_after_body /autoindex.html;
+	}
+	location ~ /dl/ {
+		autoindex on;
+		autoindex_localtime on;
+		add_after_body /autoindex.html;
+	}
+
+	location ~ /norad/ {
+		autoindex off;
+		add_header 'Cross-Origin-Opener-Policy' 'same-origin';
+		add_header 'Cross-Origin-Embedder-Policy' 'require-corp';
+		index norad-web.html;
+	}	
+
+        location ~ /sbgame/ {
+                autoindex off;
+                add_header 'Cross-Origin-Opener-Policy' 'same-origin';
+                add_header 'Cross-Origin-Embedder-Policy' 'require-corp';
+                index "Michealsoft Ballmer Simulator.html";
+        } 
+
+	location = /bash/ {
+		autoindex on;
+		autoindex_localtime on;
+		add_after_body /autoindex.html;
+	}
+
+	location = /sbgame-leaderboard/ {
+		autoindex on;
+		autoindex_localtime on;
+		add_after_body /autoindex.html;
+	}
+
+	location ~ /bestshitsarchive/yeah/ {
+		autoindex on;
+	}
+
+	location = /upload {
+		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+		proxy_set_header X-Forwarded-Proto $scheme;
+		proxy_set_header Host $http_host;
+		# we don't want nginx trying to do something clever with
+		# redirects, we set the Host: header above already.
+		proxy_redirect off;
+		proxy_pass https://127.0.0.1:5000/upload;
+	}
+	location = /feedback {
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                proxy_set_header X-Forwarded-Proto $scheme;
+                proxy_set_header Host $http_host;
+                # we don't want nginx trying to do something clever with
+                # redirects, we set the Host: header above already.
+                proxy_redirect off;
+                proxy_pass https://127.0.0.1:5000/feedback;
+	}
+
+	location = /bsupload {
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                proxy_set_header X-Forwarded-Proto $scheme;
+                proxy_set_header Host $http_host;
+                # we don't want nginx trying to do something clever with
+                # redirects, we set the Host: header above already.
+                proxy_redirect off;
+                proxy_pass https://127.0.0.1:5000/bsupload;
+	}
+
+    listen 443 ssl; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/gringpartei.ch/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/gringpartei.ch/privkey.pem; # managed by Certbot
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+
+
+}
+server {
+    if ($host = x-im.li) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+
+    if ($host = gringpartei.ch) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+
+	server_name gringpartei.ch x-im.li;
+	listen 80;
+    return 404; # managed by Certbot
+
+
+
+
+}
